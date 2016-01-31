@@ -1,0 +1,278 @@
+#include "RowDescriptionsWindow.h"
+#include "resource.h"
+#include <tchar.h>
+#include <stdlib.h>
+
+wchar_t* RowDescriptionsWindow::className = L"ClassRowDescriptionsWindow";
+
+RowDescriptionsWindow::RowDescriptionsWindow(RowDescriptionController controller)
+	: handle(0)
+	, rowCount_(DEFAULT_ROW_COUNT)
+	, cellSize_(CELL_SIZE)
+	, controller_(controller)
+{
+	backgroundBrush_ = CreateSolidBrush(EDIT_CELL_COLOR);
+}
+
+RowDescriptionsWindow::~RowDescriptionsWindow() {}
+
+bool RowDescriptionsWindow::RegisterClass(HINSTANCE hInstance) {
+	WNDCLASSEX wc;
+	wc.cbSize = sizeof(WNDCLASSEX);
+	wc.style = 0;
+	wc.lpfnWndProc = windowProc;
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = 0;
+	wc.hIcon = NULL;
+	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	wc.lpszMenuName = NULL;
+	wc.lpszClassName = className;
+	wc.hInstance = hInstance;
+	wc.hIconSm = NULL;
+	if (!RegisterClassEx(&wc)) {
+		MessageBox(NULL, L"Can't register class", L"ERROR!", MB_OK | MB_ICONEXCLAMATION);
+		return false;
+	}
+
+	return true;
+}
+
+bool RowDescriptionsWindow::Create(HINSTANCE hInstance, HWND hWndParent, int rowCount, int positionX, int positionY) {
+	hInstance_ = hInstance;
+	rowCount_ = rowCount;
+	cells_.resize(rowCount);
+
+	handle = CreateWindow(className, NULL, WS_CHILD | WS_VISIBLE,
+		positionX, positionY, cellSize_ + 2, rowCount_ * cellSize_ + 2,
+		hWndParent, NULL, hInstance, this);
+
+	for (int row = 0; row < rowCount; ++row) {
+		HWND cell = CreateWindow(L"EDIT", NULL,
+			WS_BORDER | WS_CHILD | WS_VISIBLE | ES_NUMBER | ES_CENTER,
+			0, row * cellSize_, cellSize_, cellSize_,
+			handle,         // parent window 
+			0, hInstance_, NULL);
+
+		cells_[row].push_back(cell);
+		cellRow_[cell] = row;
+		cellPosition_[cell] = 0;
+	}
+
+	return true;
+}
+
+void RowDescriptionsWindow::Show(int cmdShow) {
+	ShowWindow(handle, cmdShow);
+	UpdateWindow(handle);
+}
+
+int RowDescriptionsWindow::Size() {
+	return cells_[0].size();
+}
+
+HWND RowDescriptionsWindow::GetHandle() {
+	return handle;
+}
+
+void RowDescriptionsWindow::UpdateDataFromWindow() {
+	vector< vector<int> > blocksSizes(rowCount_);
+
+	for (int row = 0; row < rowCount_; ++row) {
+		for (int i = 0; i < cells_[row].size(); ++i) {
+			LRESULT length = SendMessage(cells_[row][i], WM_GETTEXTLENGTH, 0, 0);
+			WCHAR *buffer = new TCHAR[length + 1];
+			SendMessage(cells_[row][i], WM_GETTEXT, (WPARAM)length + 1, (LPARAM)buffer);
+
+			int value = _wtoi(buffer);
+
+			if (length != 0 && value != 0) {
+				blocksSizes[row].push_back(value);
+			}
+
+			delete[] buffer;
+		}
+
+		std::reverse(blocksSizes[row].begin(), blocksSizes[row].end());
+	}
+
+	controller_.SetBlockSizes(blocksSizes);
+}
+
+void RowDescriptionsWindow::UpdateWindowFromData() {
+	const vector< vector<int> > &blockSizes = controller_.GetBlockSizes();
+
+	int maxSize = 0;
+	for (int i = 0; i < blockSizes.size(); ++i) {
+		if (blockSizes[i].size() > maxSize) {
+			maxSize = blockSizes[i].size();
+		}
+	}
+
+	for (int i = cells_[0].size(); i < maxSize; ++i) {
+		AddColumn();
+	}
+
+	if (blockSizes.size() >= rowCount_) {
+		cells_.resize(blockSizes.size());
+		for (int row = rowCount_; row < blockSizes.size(); ++row) {
+			for (int i = 0; i < cells_[0].size(); ++i) {
+				int xPosition = (cells_[0].size() - i - 1) * cellSize_;
+				HWND cell = CreateWindow(L"EDIT", NULL,
+					WS_BORDER | WS_CHILD | WS_VISIBLE | ES_NUMBER | ES_CENTER,
+					xPosition, row * cellSize_, cellSize_, cellSize_,
+					handle,         // parent window 
+					0, hInstance_, NULL);
+
+				cells_[row].push_back(cell);
+				cellRow_[cell] = row;
+				cellPosition_[cell] = i;
+			}
+		}
+	}
+	else {
+		for (int row = blockSizes.size(); row < rowCount_; ++row) {
+			for (int i = 0; i < cells_[0].size(); ++i) {
+				cellRow_.erase(cells_[row][i]);
+				cellPosition_.erase(cells_[row][i]);
+				DestroyWindow(cells_[row][i]);
+			}
+		}
+
+		cells_.resize(blockSizes.size());
+	}
+
+	rowCount_ = blockSizes.size();
+
+	WCHAR buffer[MAX_PATH];
+
+	for (int row = 0; row < rowCount_; ++row) {
+		for (int i = 0; i < cells_[row].size(); ++i) {
+			SetWindowText(cells_[row][i], L"");
+		}
+	}
+
+	for (int row = 0; row < blockSizes.size(); ++row) {
+		for (int i = 0; i < blockSizes[row].size(); ++i) {
+			_itow_s(blockSizes[row][blockSizes[row].size() - i - 1], buffer, MAX_PATH, 10);
+			SetWindowText(cells_[row][i], buffer);
+		}
+	}
+}
+
+void RowDescriptionsWindow::AddColumn() {
+	MoveCellsRight();
+
+	for (int row = 0; row < cells_.size(); ++row) {
+		HWND cell = CreateWindow(L"EDIT", NULL,
+			WS_BORDER | WS_CHILD | WS_VISIBLE | ES_NUMBER | ES_CENTER,
+			0, row * cellSize_, cellSize_, cellSize_,
+			handle,         // parent window 
+			0, hInstance_, NULL);
+
+		cells_[row].push_back(cell);
+		cellRow_[cell] = row;
+		cellPosition_[cell] = 0;
+	}
+}
+
+void RowDescriptionsWindow::MoveCellsRight() {
+	for (int row = 0; row < cells_.size(); ++row) {
+		for (int i = 0; i < cells_[row].size(); ++i) {
+			int xPosition = (cells_[row].size() - i) * cellSize_;
+			SetWindowPos(cells_[row][i], NULL, xPosition, row * cellSize_, cellSize_, cellSize_, NULL);
+		}
+	}
+}
+
+void RowDescriptionsWindow::onDestroy() {
+	PostQuitMessage(0);
+}
+
+//void RowDescriptionsWindow::SetRowCount(int rowCount) {
+//	if (rowCount >= rowCount_) {
+//		cells_.resize(rowCount);
+//		for (int row = rowCount_; row < rowCount; ++row) {
+//			for (int i = 0; i < cells_[0].size(); ++i) {
+//				int xPosition = (cells_[0].size() - i - 1) * cellSize_;
+//				HWND cell = CreateWindow(L"EDIT", NULL,
+//					WS_BORDER | WS_CHILD | WS_VISIBLE | ES_NUMBER | ES_CENTER,
+//					xPosition, row * cellSize_, cellSize_, cellSize_,
+//					handle,         // parent window 
+//					0, hInstance_, NULL);
+//
+//				cells_[row].push_back(cell);
+//				cellRow_[cell] = row;
+//				cellPosition_[cell] = i;
+//			}
+//		}
+//	}
+//	else {
+//		for (int row = rowCount; row < rowCount_; ++row) {
+//			for (int i = 0; i < cells_[0].size(); ++i) {
+//				cellRow_.erase(cells_[row][i]);
+//				cellPosition_.erase(cells_[row][i]);
+//				DestroyWindow(cells_[row][i]);
+//			}
+//		}
+//
+//		cells_.resize(rowCount);
+//	}
+//
+//	rowCount_ = rowCount;
+//}
+
+void RowDescriptionsWindow::onEdit(WPARAM wParam, LPARAM lParam) {
+	if (HIWORD(wParam) == EN_KILLFOCUS) {
+		HWND editHandle = (HWND)lParam;
+
+		if (cellPosition_.find(editHandle) == cellPosition_.end()) {
+			return;
+		}
+
+		LRESULT length = SendMessage(editHandle, WM_GETTEXTLENGTH, 0, 0);
+		WCHAR *buffer = new TCHAR[length + 1];
+		SendMessage(editHandle, WM_GETTEXT, (WPARAM)length + 1, (LPARAM)buffer);
+
+		int newValue = _wtoi(buffer);
+
+		if (length == 0 || newValue == 0) {
+			SetWindowText(editHandle, L"");
+		}
+		else {
+			_itow_s(newValue, buffer, length + 1, 10);
+			SetWindowText(editHandle, buffer);
+		}
+
+		delete[] buffer;
+
+		UpdateDataFromWindow();
+
+		return;
+	}
+}
+
+LRESULT __stdcall RowDescriptionsWindow::windowProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam) {
+	RowDescriptionsWindow* that = reinterpret_cast< RowDescriptionsWindow* >(GetWindowLong(handle, GWL_USERDATA));
+
+	if (message == WM_NCCREATE) {
+		RowDescriptionsWindow* that = reinterpret_cast< RowDescriptionsWindow* >(reinterpret_cast<LPCREATESTRUCT>(lParam)->lpCreateParams);
+		SetWindowLong(handle, GWL_USERDATA, reinterpret_cast<LONG>(that));
+
+		return DefWindowProc(handle, message, wParam, lParam);
+	}
+
+	switch (message) {
+	case WM_DESTROY:
+		that->onDestroy();
+		return 0;
+	case WM_COMMAND:
+		that->onEdit(wParam, lParam);
+		return 0;
+	case WM_CTLCOLOREDIT:
+		SetBkColor((HDC)wParam, EDIT_CELL_COLOR);
+		return (LRESULT)that->backgroundBrush_;
+	}
+
+	return DefWindowProc(handle, message, wParam, lParam);
+}

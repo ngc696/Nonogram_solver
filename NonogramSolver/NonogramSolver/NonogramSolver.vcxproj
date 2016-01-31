@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}</ProjectGuid>
+    <RootNamespace>NonogramSolver</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ColumnDescriptionController.cpp" />
+    <ClCompile Include="ColumnDescriptionWindow.cpp" />
+    <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="DialogWindow.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NonogramCellWindow.cpp" />
+    <ClCompile Include="NonogramField.cpp" />
+    <ClCompile Include="NonogramFieldController.cpp" />
+    <ClCompile Include="NonogramFieldWindow.cpp" />
+    <ClCompile Include="NonogramSolver.cpp" />
+    <ClCompile Include="OverlappedWindow.cpp" />
+    <ClCompile Include="RowDescriptionController.cpp" />
+    <ClCompile Include="RowDescriptionsWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ColumnDescriptionController.h" />
+    <ClInclude Include="ColumnDescriptionsWindow.h" />
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="DialogWindow.h" />
+    <ClInclude Include="NonogramCell.h" />
+    <ClInclude Include="NonogramCellWindow.h" />
+    <ClInclude Include="NonogramField.h" />
+    <ClInclude Include="NonogramFieldController.h" />
+    <ClInclude Include="NonogramFieldWindow.h" />
+    <ClInclude Include="NonogramSolver.h" />
+    <ClInclude Include="OverlappedWindow.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RowDescriptionController.h" />
+    <ClInclude Include="RowDescriptionsWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NonogramSolver.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ribbon1.mfcribbon-ms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon16.ico" />
+    <Image Include="icon32.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

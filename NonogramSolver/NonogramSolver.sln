@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NonogramSolver", "NonogramSolver\NonogramSolver.vcxproj", "{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Converter", "Converter\Converter.vcxproj", "{1FE65B38-4210-4579-AA7D-63106916AAF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|Win32 = Debug|Win32
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}.Debug|Win32.Build.0 = Debug|Win32
+		{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}.Release|Any CPU.ActiveCfg = Release|Win32
+		{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}.Release|Win32.ActiveCfg = Release|Win32
+		{0C53A017-6BD9-4763-B57E-3BBD07A66B6F}.Release|Win32.Build.0 = Release|Win32
+		{1FE65B38-4210-4579-AA7D-63106916AAF3}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{1FE65B38-4210-4579-AA7D-63106916AAF3}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{1FE65B38-4210-4579-AA7D-63106916AAF3}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{1FE65B38-4210-4579-AA7D-63106916AAF3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1FE65B38-4210-4579-AA7D-63106916AAF3}.Debug|Win32.Build.0 = Debug|Win32
+		{1FE65B38-4210-4579-AA7D-63106916AAF3}.Release|Any CPU.ActiveCfg = Release|Win32
+		{1FE65B38-4210-4579-AA7D-63106916AAF3}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{1FE65B38-4210-4579-AA7D-63106916AAF3}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{1FE65B38-4210-4579-AA7D-63106916AAF3}.Release|Win32.ActiveCfg = Release|Win32
+		{1FE65B38-4210-4579-AA7D-63106916AAF3}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

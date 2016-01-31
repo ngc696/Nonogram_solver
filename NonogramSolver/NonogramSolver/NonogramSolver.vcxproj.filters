@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Файлы исходного кода">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Заголовочные файлы">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Заголовочные файлы\Model">
+      <UniqueIdentifier>{df022403-5fc4-4751-a6a9-388fc8ed56d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\View">
+      <UniqueIdentifier>{4fd91a91-bf36-48f1-8155-cc18f2d954c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Model">
+      <UniqueIdentifier>{fbc74e5a-322a-4531-9087-431d8fcde5fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\View">
+      <UniqueIdentifier>{aeee8480-6b1d-4f7e-8317-b9ad017b7e84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\Controller">
+      <UniqueIdentifier>{260a46e5-54e4-45f9-850b-e7165479cb9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Controller">
+      <UniqueIdentifier>{9209ad0a-5107-43ba-85f7-c96d545405e5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="Constants.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="NonogramSolver.cpp">
+      <Filter>Файлы исходного кода\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="NonogramField.cpp">
+      <Filter>Файлы исходного кода\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="NonogramCellWindow.cpp">
+      <Filter>Файлы исходного кода\View</Filter>
+    </ClCompile>
+    <ClCompile Include="NonogramFieldWindow.cpp">
+      <Filter>Файлы исходного кода\View</Filter>
+    </ClCompile>
+    <ClCompile Include="ColumnDescriptionWindow.cpp">
+      <Filter>Файлы исходного кода\View</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogWindow.cpp">
+      <Filter>Файлы исходного кода\View</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlappedWindow.cpp">
+      <Filter>Файлы исходного кода\View</Filter>
+    </ClCompile>
+    <ClCompile Include="RowDescriptionsWindow.cpp">
+      <Filter>Файлы исходного кода\View</Filter>
+    </ClCompile>
+    <ClCompile Include="ColumnDescriptionController.cpp">
+      <Filter>Файлы исходного кода\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="RowDescriptionController.cpp">
+      <Filter>Файлы исходного кода\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="NonogramFieldController.cpp">
+      <Filter>Файлы исходного кода\Controller</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="NonogramField.h">
+      <Filter>Заголовочные файлы\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="NonogramCell.h">
+      <Filter>Заголовочные файлы\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="NonogramCellWindow.h">
+      <Filter>Заголовочные файлы\View</Filter>
+    </ClInclude>
+    <ClInclude Include="ColumnDescriptionsWindow.h">
+      <Filter>Заголовочные файлы\View</Filter>
+    </ClInclude>
+    <ClInclude Include="NonogramFieldWindow.h">
+      <Filter>Заголовочные файлы\View</Filter>
+    </ClInclude>
+    <ClInclude Include="NonogramSolver.h">
+      <Filter>Заголовочные файлы\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="OverlappedWindow.h">
+      <Filter>Заголовочные файлы\View</Filter>
+    </ClInclude>
+    <ClInclude Include="RowDescriptionsWindow.h">
+      <Filter>Заголовочные файлы\View</Filter>
+    </ClInclude>
+    <ClInclude Include="ColumnDescriptionController.h">
+      <Filter>Заголовочные файлы\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="RowDescriptionController.h">
+      <Filter>Заголовочные файлы\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="NonogramFieldController.h">
+      <Filter>Заголовочные файлы\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogWindow.h">
+      <Filter>Заголовочные файлы\Controller</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NonogramSolver.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ribbon1.mfcribbon-ms">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon16.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="icon32.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
